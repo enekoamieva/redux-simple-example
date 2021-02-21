@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+//REDUX
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
+
+  //Obtener todos los valores del STORE de REDUX
+  const counter = useSelector(state => state.counter);
+  const isLogged = useSelector(state => state.isLogged);
+
+  //Ejecutamos las acciones para cambiar los valores del STATE del STORE
+  const dispatch = useDispatch()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Counter: {counter}</h1>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+      <p>
+        <button onClick={() => dispatch({ type: 'SIGN_IN' })}>
+          {isLogged ? 'LOGOUT' : 'LOGIN'}
+        </button>
+      </p>
     </div>
   );
 }
